@@ -1,3 +1,4 @@
+// script.js
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -10,7 +11,9 @@ const gameOverScreen = document.getElementById("gameOverScreen");
 const tryAgainButton = document.getElementById("tryAgainButton");
 const fullscreenButton = document.getElementById("fullscreenButton");
 
-const box = 27;
+const box = 40; // Размер клетки
+const rows = 16; // Количество строк
+const cols = 16; // Количество столбцов
 let snake = [];
 let food;
 let score;
@@ -25,11 +28,20 @@ tryAgainButton.addEventListener("click", startGame);
 fullscreenButton.addEventListener("click", toggleFullScreen);
 document.addEventListener("keydown", direction);
 
+resizeCanvas();
+
+function resizeCanvas() {
+  canvas.width = cols * box;
+  canvas.height = rows * box;
+}
+
+window.addEventListener("resize", resizeCanvas);
+
 function startGame() {
   startScreen.classList.remove("active");
   gameOverScreen.classList.remove("active");
   overlay.style.display = "none";
-  snake = [{ x: 12 * box, y: 12 * box }];
+  snake = [{ x: Math.floor(cols / 2) * box, y: Math.floor(rows / 2) * box }];
   score = 0;
   d = null;
   scoreDisplay.innerText = "Счет: " + score;
@@ -40,8 +52,8 @@ function startGame() {
 
 function placeFood() {
   food = {
-    x: Math.floor(Math.random() * 25) * box,
-    y: Math.floor(Math.random() * 25) * box,
+    x: Math.floor(Math.random() * cols) * box,
+    y: Math.floor(Math.random() * rows) * box,
   };
 }
 
@@ -59,6 +71,8 @@ function direction(event) {
 }
 
 function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   // Шахматный фон
   for (let x = 0; x < canvas.width; x += box) {
     for (let y = 0; y < canvas.height; y += box) {
@@ -144,7 +158,6 @@ function draw() {
   } else {
     snake.pop();
   }
-
   let newHead = { x: snakeX, y: snakeY };
 
   if (
@@ -161,7 +174,6 @@ function draw() {
 
   snake.unshift(newHead);
 }
-
 function collision(head, array) {
   for (let i = 0; i < array.length; i++) {
     if (head.x === array[i].x && head.y === array[i].y) {

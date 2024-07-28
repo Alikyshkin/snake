@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Змейка</h1>
-    <div id="controls">
-      <div id="score">Счет: 0</div>
-      <button id="fullscreenButton">⛶</button>
-    </div>
     <div id="gameContainer">
+      <div id="controlsOverlay">
+        <div id="score">Счет: 0</div>
+        <button id="fullscreenButton">⛶</button>
+      </div>
       <div id="overlay">
         <div id="startScreen">
           <button id="startButton">Начать</button>
@@ -22,7 +21,7 @@
           <button id="tryAgainButton">Попробовать снова</button>
         </div>
       </div>
-      <canvas id="gameCanvas" width="675" height="675"></canvas>
+      <canvas id="gameCanvas"></canvas>
     </div>
     <script src="script.js"></script>
   </body>

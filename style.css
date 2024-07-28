@@ -1,3 +1,4 @@
+/* style.css */
 body {
     display: flex;
     flex-direction: column;
@@ -7,10 +8,12 @@ body {
     margin: 0;
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 2rem;
 }
 
 #gameContainer {
@@ -18,42 +21,51 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 400px;
 }
 
 canvas {
     border: 1px solid #ccc;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
 }
 
 button {
-    background: #dedede;
-    border-radius: 50px;
-    padding: 15px 60px;
+    background: #4CAF50;
+    border-radius: 5px;
+    padding: 10px 20px;
     font-weight: bold;
     border: none;
-    font-size: 20px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
 }
 
-#controls {
-    position: fixed;
-    top: 10px;
+#controlsOverlay {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 10px;
     box-sizing: border-box;
+    background: rgb(0, 126, 55);
+    align-items: center;
+    color: white;
 }
 
 #score {
-    color: black;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 #fullscreenButton {
     background: none;
     border: none;
-    color: black;
     font-size: 24px;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
 
 #overlay {
@@ -70,13 +82,27 @@ button {
 }
 
 #startScreen, #gameOverScreen {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    display: none;
 }
 
 #startScreen.active, #gameOverScreen.active {
     display: flex;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    #score {
+        font-size: 20px;
+    }
 }
