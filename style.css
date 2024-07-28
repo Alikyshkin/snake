@@ -33,26 +33,25 @@ button {
     font-size: 20px;
 }
 
-#gameOverScreen h2 {
-    color: white;
-    font-size: 24px;
+#controls {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 #score {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: white;
+    color: black;
     font-size: 24px;
 }
 
 #fullscreenButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background: none;
     border: none;
-    color: white;
+    color: black;
     font-size: 24px;
     cursor: pointer;
 }

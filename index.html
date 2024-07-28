@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Змейка</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <h1>Змейка</h1>
+    <div id="controls">
+      <div id="score">Счет: 0</div>
+      <button id="fullscreenButton">⛶</button>
+    </div>
     <div id="gameContainer">
-        <div id="overlay">
-            <div id="startScreen">
-                <button id="startButton">Начать</button>
-            </div>
-            <div id="gameOverScreen">
-                <h2>GAME OVER</h2>
-                <button id="tryAgainButton">Попробовать снова</button>
-            </div>
+      <div id="overlay">
+        <div id="startScreen">
+          <button id="startButton">Начать</button>
         </div>
-        <canvas id="gameCanvas" width="1000" height="1000"></canvas>
-        <div id="score">Счет: 0</div>
-        <button id="fullscreenButton">⛶</button>
+        <div id="gameOverScreen">
+          <h2>GAME OVER</h2>
+          <button id="tryAgainButton">Попробовать снова</button>
+        </div>
+      </div>
+      <canvas id="gameCanvas" width="675" height="675"></canvas>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
