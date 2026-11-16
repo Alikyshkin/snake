@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#172620">
+    <meta name="description" content="Браузерная Змейка с управлением на клавиатуре и сенсорном экране.">
     <title>Змейка</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="gameContainer">
-      <div id="controlsOverlay">
-        <div id="score">Счет: 0</div>
-        <button id="fullscreenButton">⛶</button>
-      </div>
-      <div id="overlay">
-        <div id="startScreen">
-          <button id="startButton">Начать</button>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main id="gameContainer" class="console">
+        <header class="console__header">
+            <h1>Змейка</h1>
+            <button id="fullscreenButton" class="fullscreen" type="button" aria-label="Развернуть поле" title="Развернуть поле" aria-pressed="false" hidden>⛶</button>
+        </header>
+        <dl class="readout">
+            <div><dt>Счёт</dt><dd id="score">0</dd></div>
+            <div><dt>Рекорд</dt><dd id="record">0</dd></div>
+        </dl>
+        <div class="screen">
+            <canvas id="gameCanvas" width="512" height="512" tabindex="0" aria-label="Поле Змейки" aria-describedby="controls-hint">
+                Для игры нужен браузер с поддержкой Canvas.
+            </canvas>
+            <div class="screen__overlay" id="overlay">
+                <div class="screen__menu">
+                    <h2 id="screen-title" role="status">Новая игра</h2>
+                    <p id="screen-description">Собирайте ягоды и держитесь подальше от стен.</p>
+                    <button id="startButton" class="primary" type="button">Начать</button>
+                </div>
+            </div>
         </div>
-        <div id="gameOverScreen">
-          <h2>GAME OVER</h2>
-          <button id="tryAgainButton">Попробовать снова</button>
+        <div class="console__footer">
+            <p id="controls-hint">Стрелки или WASD</p>
+            <button id="pauseButton" class="pause" type="button" hidden>Пауза</button>
         </div>
-      </div>
-      <canvas id="gameCanvas"></canvas>
-    </div>
-    <script src="script.js"></script>
-  </body>
+        <div class="dpad" role="group" aria-label="Управление направлением">
+            <button type="button" data-direction="up" aria-label="Вверх">↑</button>
+            <button type="button" data-direction="left" aria-label="Влево">←</button>
+            <button type="button" data-direction="down" aria-label="Вниз">↓</button>
+            <button type="button" data-direction="right" aria-label="Вправо">→</button>
+        </div>
+    </main>
+</body>
 </html>

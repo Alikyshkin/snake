@@ -1,108 +1,197 @@
-/* style.css */
+:root {
+    color-scheme: dark;
+    --background: #172620;
+    --panel: #223b30;
+    --screen: #102319;
+    --light: #edf1d8;
+    --muted: #b8c8b7;
+    --edge: #59745f;
+    --lime: #cee971;
+    font: 16px "IBM Plex Mono", Menlo, Consolas, monospace;
+    color: var(--light);
+    background: var(--background);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    min-height: 100svh;
     margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
+    display: grid;
+    align-items: center;
+    background-image: radial-gradient(ellipse at 50% 20%, #385042 0%, transparent 63%);
+}
+
+button { font: inherit; color: inherit; cursor: pointer; }
+
+button:focus-visible, canvas:focus-visible {
+    outline: 3px solid var(--lime);
+    outline-offset: 3px;
+}
+
+.console {
+    width: min(100% - 2rem, 31.25rem);
+    margin: clamp(1rem, 4vh, 2rem) auto;
+    padding: clamp(.85rem, 3vw, 1.35rem);
+    border: 1px solid var(--edge);
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: 0 7px 0 #112019, 0 14px 34px #07130d66;
+}
+
+.console__header, .console__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
 }
 
 h1 {
-    margin-bottom: 10px;
-    font-size: 2rem;
+    margin: 0;
+    color: var(--lime);
+    font-size: clamp(1.75rem, 6vw, 2.6rem);
+    letter-spacing: -.08em;
 }
 
-#gameContainer {
-    position: relative;
+.fullscreen, .pause {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: .35rem .7rem;
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    background: #193327;
+}
+
+.fullscreen { font-size: 1.35rem; }
+
+.fullscreen:hover, .pause:hover, .dpad button:hover { background: #365243; }
+
+.readout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin: .9rem 0;
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    background: var(--edge);
+    overflow: hidden;
+}
+
+.readout div {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .46rem .65rem;
+    background: var(--screen);
+}
+
+.readout dt { color: var(--muted); font-size: .76rem; }
+.readout dd { margin: 0; color: var(--lime); font-size: 1.3rem; font-weight: 700; }
+
+.screen {
+    position: relative;
+    border: 1px solid var(--edge);
+    border-radius: 9px;
+    background: var(--screen);
 }
 
 canvas {
-    border: 1px solid #ccc;
+    display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 1;
+    border-radius: 8px;
+    touch-action: none;
 }
 
-button {
-    background: #4CAF50;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-weight: bold;
-    border: none;
-    font-size: 16px;
-    color: white;
-    cursor: pointer;
-    margin: 10px;
-}
-
-#controlsOverlay {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-    box-sizing: border-box;
-    background: rgb(0, 126, 55);
-    align-items: center;
-    color: white;
-}
-
-#score {
-    font-size: 20px;
-}
-
-#fullscreenButton {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-}
-
-#overlay {
+.screen__overlay {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: #0a1b11b8;
+    padding: .8rem;
+    border-radius: 8px;
+}
+
+.screen__menu {
+    width: min(100%, 17.5rem);
+    padding: clamp(.9rem, 5vw, 1.4rem);
+    text-align: center;
+    background: #17291f;
+    border: 1px solid var(--edge);
+    border-radius: 9px;
+}
+
+.screen__menu h2 { margin: 0; color: var(--light); font-size: clamp(1.08rem, 4vw, 1.45rem); }
+.screen__menu p { margin: .6rem 0 1rem; color: var(--muted); font-size: .82rem; line-height: 1.45; }
+
+.primary {
+    min-height: 44px;
+    border: 1px solid var(--lime);
+    border-radius: 6px;
+    background: var(--lime);
+    color: #19271c;
+    padding: .45rem 1rem;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.primary:hover { background: #e4f299; }
+
+.console__footer { min-height: 44px; margin-top: .6rem; }
+.console__footer p { margin: 0; color: var(--muted); font-size: .76rem; }
+.pause { font-size: .8rem; }
+
+.dpad {
+    display: none;
+    grid-template-columns: repeat(3, 44px);
+    justify-content: center;
+    gap: .28rem;
+    margin-top: .2rem;
+}
+
+.dpad button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    background: #193327;
+    font-size: 1.25rem;
+    touch-action: manipulation;
+}
+.dpad button:first-child { grid-column: 2; }
+.dpad button:nth-child(2) { grid-column: 1; }
+
+.console:fullscreen, .console--expanded {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    padding-inline: max(.85rem, (100vw - 30rem) / 2);
+    overflow: auto;
+    overscroll-behavior: contain;
 }
 
-#startScreen, #gameOverScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.console--expanded { position: fixed; inset: 0; z-index: 1; }
+
+@media (pointer: coarse), (max-width: 550px) {
+    .dpad { display: grid; }
 }
 
-#startScreen.active, #gameOverScreen.active {
-    display: flex;
+@media (max-height: 740px) and (pointer: fine) and (min-width: 551px) {
+    .console:not(.console--expanded) { width: min(100% - 2rem, calc(100svh - 10.5rem)); }
 }
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    #score {
-        font-size: 20px;
-    }
+@media (max-width: 360px) {
+    .console:not(.console--expanded) { width: calc(100% - 1.25rem); }
+    .readout div { padding-inline: .45rem; }
 }
